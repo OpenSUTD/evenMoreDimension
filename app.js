@@ -27,9 +27,18 @@ const TYPE_DOWNLOADABILITY = {
  */
 
 const getDownloadable = function(els) {
-  return $(els).filter(function() {
-    return TYPE_DOWNLOADABILITY[getType(this)];
-  });
+  const ensureCorrectType = function() {
+      return TYPE_DOWNLOADABILITY[getType(this)];
+  }
+
+  const ensureNotTabAction = function() {
+      return this.href && !this.href.match(/mode=.+#/);
+
+  }
+
+  return $(els)
+    .filter(ensureCorrectType)
+    .filter(ensureNotTabAction)
 }
 
 const getFolders = function(els) {
@@ -62,9 +71,6 @@ const getLinkInfo = (el) => {
 /*
  ** START (FURREAL)
  */
-
- $('head link[type="image/x-icon"]').attr('href', SUTD_SQ_LOGO_SRC);
- console.log
 
 const getAllLinks = (el = $('body')) => {
     return $(el).find('#content_listContainer li a');

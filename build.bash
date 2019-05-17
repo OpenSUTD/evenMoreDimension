@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-zip dist *.js manifest.json sass/style.css
+zip dist *.js manifest.json sass/style.css images/*
